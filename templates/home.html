@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make Prediction</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        padding: 40px 15px;
+
+        background: linear-gradient(135deg, #141e30, #243b55);
+
+        color: white;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 750px;
+        margin: auto;
+
+        background: rgba(255, 255, 255, 0.10);
+
+        backdrop-filter: blur(12px);
+
+        padding: 40px;
+
+        border-radius: 25px;
+
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #bdc9d0;
+        margin-bottom: 30px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .input-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 7px;
+        font-size: 14px;
+        color: #dce5e9;
+    }
+
+    input {
+        width: 100%;
+        padding: 13px;
+
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        border-radius: 10px;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        color: white;
+
+        outline: none;
+
+        font-size: 15px;
+    }
+
+    input:focus {
+        border-color: #ff7043;
+
+        box-shadow: 0 0 8px rgba(255, 112, 67, 0.35);
+    }
+
+    input::placeholder {
+        color: #9caab1;
+    }
+
+    .button-container {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    button {
+        border: none;
+
+        padding: 15px 45px;
+
+        border-radius: 30px;
+
+        background: linear-gradient(135deg, #ff512f, #dd2476);
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+
+        box-shadow: 0 12px 25px rgba(221, 36, 118, 0.5);
+    }
+
+    .result {
+        margin-top: 30px;
+
+        padding: 20px;
+
+        text-align: center;
+
+        border-radius: 15px;
+
+        background: rgba(0, 0, 0, 0.20);
+    }
+
+    .result h2 {
+        font-size: 20px;
+        color: #ffb199;
+    }
+
+    .back {
+        display: block;
+
+        text-align: center;
+
+        margin-top: 25px;
+
+        color: #dce5e9;
+
+        text-decoration: none;
+
+        font-size: 14px;
+    }
+
+    .back:hover {
+        color: white;
+    }
+
+    @media (max-width: 600px) {
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .container {
+            padding: 25px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <h1>🔥 Forest Fire Prediction</h1>
+
+    <p class="subtitle">
+        Enter the environmental parameters to get an ML prediction
+    </p>
+
+    <form action="{{ url_for('predict_datapoints') }}" method="post">
+
+        <div class="form-grid">
+
+            <div class="input-box">
+                <label>Temperature</label>
+                <input type="text" name="Temperature"
+                       placeholder="Enter temperature" required>
+            </div>
+
+            <div class="input-box">
+                <label>Relative Humidity (RH)</label>
+                <input type="text" name="RH"
+                       placeholder="Enter RH" required>
+            </div>
+
+            <div class="input-box">
+                <label>Wind Speed (Ws)</label>
+                <input type="text" name="Ws"
+                       placeholder="Enter wind speed" required>
+            </div>
+
+            <div class="input-box">
+                <label>Rain</label>
+                <input type="text" name="Rain"
+                       placeholder="Enter rain value" required>
+            </div>
+
+            <div class="input-box">
+                <label>FFMC</label>
+                <input type="text" name="FFMC"
+                       placeholder="Enter FFMC" required>
+            </div>
+
+            <div class="input-box">
+                <label>DMC</label>
+                <input type="text" name="DMC"
+                       placeholder="Enter DMC" required>
+            </div>
+
+            <div class="input-box">
+                <label>ISI</label>
+                <input type="text" name="ISI"
+                       placeholder="Enter ISI" required>
+            </div>
+
+            <div class="input-box">
+                <label>Classes</label>
+                <input type="text" name="Classes"
+                       placeholder="Enter class value" required>
+            </div>
+
+            <div class="input-box">
+                <label>Region</label>
+                <input type="text" name="Region"
+                       placeholder="Enter region" required>
+            </div>
+
+        </div>
+
+        <div class="button-container">
+
+            <button type="submit">
+                🔥 Predict Forest Fire
+            </button>
+
+        </div>
+
+    </form>
+
+    {% if result is defined %}
+
+    <div class="result">
+
+        <h2>
+            Prediction Result: {{ result }}
+        </h2>
+
+    </div>
+
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="back">
+        ← Back to Home
+    </a>
+
+</div>
+```
+
+</body>
+
+</html>
