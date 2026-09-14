@@ -1,292 +1,422 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-```
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Make Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <title>Forest Fire Prediction</title>
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
 
-    body {
-        min-height: 100vh;
-        padding: 40px 15px;
+    <style>
 
-        background: linear-gradient(135deg, #141e30, #243b55);
-
-        color: white;
-    }
-
-    .container {
-        width: 95%;
-        max-width: 750px;
-        margin: auto;
-
-        background: rgba(255, 255, 255, 0.10);
-
-        backdrop-filter: blur(12px);
-
-        padding: 40px;
-
-        border-radius: 25px;
-
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    }
-
-    h1 {
-        text-align: center;
-        font-size: 35px;
-        margin-bottom: 10px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #bdc9d0;
-        margin-bottom: 30px;
-    }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-    }
-
-    .input-box {
-        display: flex;
-        flex-direction: column;
-    }
-
-    label {
-        margin-bottom: 7px;
-        font-size: 14px;
-        color: #dce5e9;
-    }
-
-    input {
-        width: 100%;
-        padding: 13px;
-
-        border: 1px solid rgba(255, 255, 255, 0.2);
-
-        border-radius: 10px;
-
-        background: rgba(255, 255, 255, 0.08);
-
-        color: white;
-
-        outline: none;
-
-        font-size: 15px;
-    }
-
-    input:focus {
-        border-color: #ff7043;
-
-        box-shadow: 0 0 8px rgba(255, 112, 67, 0.35);
-    }
-
-    input::placeholder {
-        color: #9caab1;
-    }
-
-    .button-container {
-        margin-top: 30px;
-        text-align: center;
-    }
-
-    button {
-        border: none;
-
-        padding: 15px 45px;
-
-        border-radius: 30px;
-
-        background: linear-gradient(135deg, #ff512f, #dd2476);
-
-        color: white;
-
-        font-size: 17px;
-
-        font-weight: bold;
-
-        cursor: pointer;
-
-        transition: 0.3s;
-
-        box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
-    }
-
-    button:hover {
-        transform: translateY(-3px);
-
-        box-shadow: 0 12px 25px rgba(221, 36, 118, 0.5);
-    }
-
-    .result {
-        margin-top: 30px;
-
-        padding: 20px;
-
-        text-align: center;
-
-        border-radius: 15px;
-
-        background: rgba(0, 0, 0, 0.20);
-    }
-
-    .result h2 {
-        font-size: 20px;
-        color: #ffb199;
-    }
-
-    .back {
-        display: block;
-
-        text-align: center;
-
-        margin-top: 25px;
-
-        color: #dce5e9;
-
-        text-decoration: none;
-
-        font-size: 14px;
-    }
-
-    .back:hover {
-        color: white;
-    }
-
-    @media (max-width: 600px) {
-
-        .form-grid {
-            grid-template-columns: 1fr;
+        * {
+            box-sizing: border-box;
         }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #141e30,
+                #243b55
+            );
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
 
         .container {
-            padding: 25px;
+            width: 100%;
+            max-width: 950px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.3);
         }
+
 
         h1 {
-            font-size: 28px;
-        }
-    }
+            text-align: center;
+            color: #222;
 
-</style>
-```
+            margin-bottom: 10px;
+        }
+
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+
+            margin-bottom: 30px;
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .field {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        label {
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #333;
+        }
+
+
+        input {
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        input:focus {
+
+            border-color: #ff5722;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #ff5722;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background: #e64a19;
+        }
+
+
+        .result {
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            background: #e8f5e9;
+
+            text-align: center;
+
+            color: #1b5e20;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-```
+
 <div class="container">
+
 
     <h1>🔥 Forest Fire Prediction</h1>
 
+
     <p class="subtitle">
-        Enter the environmental parameters to get an ML prediction
+        Enter the environmental conditions to predict forest fire.
     </p>
 
-    <form action="{{ url_for('predict_datapoints') }}" method="post">
+
+    <form
+        action="{{ url_for('predict_datapoints') }}"
+        method="post"
+    >
+
 
         <div class="form-grid">
 
-            <div class="input-box">
+
+            <!-- Day -->
+
+            <div class="field">
+
+                <label>Day</label>
+
+                <input
+                    type="number"
+                    name="day"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Month -->
+
+            <div class="field">
+
+                <label>Month</label>
+
+                <input
+                    type="number"
+                    name="month"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Year -->
+
+            <div class="field">
+
+                <label>Year</label>
+
+                <input
+                    type="number"
+                    name="year"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Temperature -->
+
+            <div class="field">
+
                 <label>Temperature</label>
-                <input type="text" name="Temperature"
-                       placeholder="Enter temperature" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="Temperature"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
-                <label>Relative Humidity (RH)</label>
-                <input type="text" name="RH"
-                       placeholder="Enter RH" required>
+
+            <!-- RH -->
+
+            <div class="field">
+
+                <label>RH</label>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="RH"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- Ws -->
+
+            <div class="field">
+
                 <label>Wind Speed (Ws)</label>
-                <input type="text" name="Ws"
-                       placeholder="Enter wind speed" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="Ws"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- Rain -->
+
+            <div class="field">
+
                 <label>Rain</label>
-                <input type="text" name="Rain"
-                       placeholder="Enter rain value" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="Rain"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- FFMC -->
+
+            <div class="field">
+
                 <label>FFMC</label>
-                <input type="text" name="FFMC"
-                       placeholder="Enter FFMC" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="FFMC"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- DMC -->
+
+            <div class="field">
+
                 <label>DMC</label>
-                <input type="text" name="DMC"
-                       placeholder="Enter DMC" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="DMC"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- ISI -->
+
+            <div class="field">
+
                 <label>ISI</label>
-                <input type="text" name="ISI"
-                       placeholder="Enter ISI" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="ISI"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- Classes -->
+
+            <div class="field">
+
                 <label>Classes</label>
-                <input type="text" name="Classes"
-                       placeholder="Enter class value" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="Classes"
+                    required
+                >
+
             </div>
 
-            <div class="input-box">
+
+            <!-- Region -->
+
+            <div class="field">
+
                 <label>Region</label>
-                <input type="text" name="Region"
-                       placeholder="Enter region" required>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="Region"
+                    required
+                >
+
             </div>
 
-        </div>
-
-        <div class="button-container">
-
-            <button type="submit">
-                🔥 Predict Forest Fire
-            </button>
 
         </div>
+
+
+        <button type="submit">
+
+            🔥 Predict Forest Fire
+
+        </button>
+
 
     </form>
 
+
     {% if result is defined %}
 
-    <div class="result">
+        <div class="result">
 
-        <h2>
-            Prediction Result: {{ result }}
-        </h2>
+            <h2>Prediction Result</h2>
 
-    </div>
+            <p>{{ result }}</p>
+
+        </div>
 
     {% endif %}
 
-    <a href="{{ url_for('index') }}" class="back">
-        ← Back to Home
-    </a>
 
 </div>
-```
+
 
 </body>
 
